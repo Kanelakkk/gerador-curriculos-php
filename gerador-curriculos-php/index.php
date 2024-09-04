@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Formulário de Currículo</title> 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -110,5 +111,58 @@
             </div>
         </form>
     </main>
+
+    <script>
+document.getElementById('btn-adicionar-formacao').addEventListener('click', function() {
+    // Criar um novo elemento de formação
+    const formacaoDiv = document.getElementById('formacoes');
+    const novaFormacao = document.createElement('div');
+    novaFormacao.classList.add('form-group');
+    novaFormacao.innerHTML = `
+        <h5>Formação</h5>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="nome_formacao">Nome da Formação</label>
+                <input type="text" class="form-control" name="formacao_nome[]" placeholder="Nome da Formação">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inicio_formacao">Início</label>
+                <input type="text" class="form-control" name="formacao_inicio[]" placeholder="Início">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="conclusao_formacao">Conclusão</label>
+                <input type="text" class="form-control" name="formacao_conclusao[]" placeholder="Conclusão">
+            </div>
+        </div>
+        <button type="button" class="btn btn-danger btn-sm btn-apagar-formacao" style="margin-top: 10px;">Apagar</button>
+    `;
+    
+    formacaoDiv.appendChild(novaFormacao);
+
+    // Adiciona o evento de apagar
+    novaFormacao.querySelector('.btn-apagar-formacao').addEventListener('click', function() {
+        novaFormacao.remove();
+    });
+});
+
+document.getElementById('btn-adicionar-experiencia').addEventListener('click', function() {
+    // Criar um novo elemento de experiência
+    const experienciaDiv = document.getElementById('experiencias');
+    const novaExperiencia = document.createElement('div');
+    novaExperiencia.classList.add('form-group');
+    novaExperiencia.innerHTML = `
+        <label for="experiencia">Experiência</label>
+        <input type="text" class="form-control" name="experiencia[]" placeholder="Nome da Experiência">
+        <button type="button" class="btn btn-danger btn-sm btn-apagar-experiencia" style="margin-left: 10px;">Apagar</button>
+    `;
+
+    experienciaDiv.appendChild(novaExperiencia);
+
+    // Adiciona o evento de apagar
+    novaExperiencia.querySelector('.btn-apagar-experiencia').addEventListener('click', function() {
+        novaExperiencia.remove();
+    });
+});
+        </script>
     </body>
 </html>
