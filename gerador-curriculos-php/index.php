@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Formulário de Currículo</title> 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -17,8 +16,7 @@
     </nav>
        
     <main class="container mt-4 background-custom ">
-
-
+       
         <form action="gerar-curriculo.php" method="post" >
             <div class="card">
                 <div class="card-body">
@@ -27,21 +25,6 @@
                     <div class="form-group" name="full-name">
                         <label for="nome">Nome Completo</label>
                         <input type="text" class="form-control" name="nome" id="nome" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="date">data de nascimento</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="age">idade</label>
-                                <input type="number" class="form-control" name="age" id="age" required>
-                            </div>
-                        </div>
                     </div>
                     
                     <div class="row">
@@ -112,46 +95,38 @@
         </form>
     </main>
 
-    <script>
-document.getElementById('btn-adicionar-formacao').addEventListener('click', function() {
-    // Criar um novo elemento de formação
+   <script>
+   document.getElementById('btn-adicionar-formacao').addEventListener('click', function() {
+    // Obter a nova contagem baseada no número de elementos existentes
     const formacaoDiv = document.getElementById('formacoes');
+    const formacaoCount = formacaoDiv.querySelectorAll('.form-group').length + 1;
+
     const novaFormacao = document.createElement('div');
     novaFormacao.classList.add('form-group');
     novaFormacao.innerHTML = `
-        <h5>Formação</h5>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="nome_formacao">Nome da Formação</label>
-                <input type="text" class="form-control" name="formacao_nome[]" placeholder="Nome da Formação">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inicio_formacao">Início</label>
-                <input type="text" class="form-control" name="formacao_inicio[]" placeholder="Início">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="conclusao_formacao">Conclusão</label>
-                <input type="text" class="form-control" name="formacao_conclusao[]" placeholder="Conclusão">
-            </div>
-        </div>
-        <button type="button" class="btn btn-danger btn-sm btn-apagar-formacao" style="margin-top: 10px;">Apagar</button>
+        <label for="formacao">Formação ${formacaoCount}</label>
+        <input type="text" class="form-control" name="formacao[]" placeholder="Nome da Formação">
+        <button type="button" class="btn btn-danger btn-sm btn-apagar-formacao" style="margin-left: 10px;">Apagar</button>
     `;
-    
+
     formacaoDiv.appendChild(novaFormacao);
 
     // Adiciona o evento de apagar
     novaFormacao.querySelector('.btn-apagar-formacao').addEventListener('click', function() {
         novaFormacao.remove();
+        atualizarFormacaoLabels(); // Atualiza as etiquetas após a remoção
     });
 });
 
 document.getElementById('btn-adicionar-experiencia').addEventListener('click', function() {
-    // Criar um novo elemento de experiência
+    // Obter a nova contagem baseada no número de elementos existentes
     const experienciaDiv = document.getElementById('experiencias');
+    const experienciaCount = experienciaDiv.querySelectorAll('.form-group').length + 1;
+
     const novaExperiencia = document.createElement('div');
     novaExperiencia.classList.add('form-group');
     novaExperiencia.innerHTML = `
-        <label for="experiencia">Experiência</label>
+        <label for="experiencia">Experiência ${experienciaCount}</label>
         <input type="text" class="form-control" name="experiencia[]" placeholder="Nome da Experiência">
         <button type="button" class="btn btn-danger btn-sm btn-apagar-experiencia" style="margin-left: 10px;">Apagar</button>
     `;
@@ -161,8 +136,34 @@ document.getElementById('btn-adicionar-experiencia').addEventListener('click', f
     // Adiciona o evento de apagar
     novaExperiencia.querySelector('.btn-apagar-experiencia').addEventListener('click', function() {
         novaExperiencia.remove();
+        atualizarExperienciaLabels(); // Atualiza as etiquetas após a remoção
     });
 });
-        </script>
-    </body>
+
+// Função para atualizar as etiquetas das formações após a remoção
+function atualizarFormacaoLabels() {
+    const formacaoDiv = document.getElementById('formacoes');
+    const formacaoItems = formacaoDiv.querySelectorAll('.form-group');
+    formacaoItems.forEach((item, index) => {
+        const label = item.querySelector('label');
+        label.textContent = `Formação ${index + 1}`;
+    });
+}
+
+// Função para atualizar as etiquetas das experiências após a remoção
+function atualizarExperienciaLabels() {
+    const experienciaDiv = document.getElementById('experiencias');
+    const experienciaItems = experienciaDiv.querySelectorAll('.form-group');
+    experienciaItems.forEach((item, index) => {
+        const label = item.querySelector('label');
+        label.textContent = `Experiência ${index + 1}`;
+    });
+}
+
+</script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
 </html>

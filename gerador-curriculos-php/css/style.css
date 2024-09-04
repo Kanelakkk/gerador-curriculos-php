@@ -1,1 +1,20 @@
- /* ser criado ainda *
+#form {
+  background: linear-gradient(to top, black 20%, purple 100%);
+  display: grid;
+  place-items: center;
+}
+
+nav {
+  background: color purple;
+}
+
+nav a {
+  color: black;
+  font-size: 30px;
+}
+
+
+.card {
+  background-color: ghostwhite;
+ 
+}
