@@ -1,27 +1,47 @@
+
 #form {
-  background: linear-gradient(to top, rgb(0, 0, 0) 20%, rgb(134, 120, 134) 100%);
-  display: grid;
-  place-items: center;
+  background: linear-gradient(to top, rgb(0, 0, 0) 20%, rgb(134, 120, 134) 100%);;
 }
 
+
 nav {
-  background: color purple;
+  text-align: center;
 }
 
 nav a {
   font-family: 'Playfair Display', serif;
-  filter: drop-shadow( 0px 0px 12px rgb(255, 255, 255));
-  color: black;
+  filter: drop-shadow(2px 2px 12px rgb(255, 255, 255));
+  color: white;
   font-size: 50px;
+  text-decoration: none;
 }
-
 
 .card {
-  background-color: ghostwhite;
- 
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
 }
+
 
 #age {
-grid: 10%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
 }
 
+
+h1, h2, p {
+  margin: 15px 0;
+  font-family: Arial, sans-serif;
+  color: black;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  background-color: #f4f4f9;
+}

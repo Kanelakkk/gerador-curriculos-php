@@ -3,127 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelo 1</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    <Style>
-        * {
-            font-family: arial;
-    font-size: 15 ;
-        }
-        @page {
-           
-            margin: 20mm;
-        }
-   
-        #bah{
-            
-            width: 210mm;
-            height: 297mm;
-            margin: 0;
-            padding: 20mm;
-            box-sizing: border-box;
-        }
-        .content {
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-        }
-
-#name-t {
-    font-family: arial;
-    font-size: 50px;
-
-}
-    </Style>
-
-
+    <title>Currículo</title>
+    <link rel="stylesheet" href="css/style.css"> 
 </head>
-<body id= "bah">
+<body>
 
 <script>
-        // Função para imprimir a página
-        function printPage() {
-            window.print();
-        }
 
-        // Chama a função de impressão assim que a página é carregada
-        window.onload = function() {
-            printPage();
-        };
-    </script>
-    
-<!-- Nome  -->
-
- <div id="name-t">
-<?php echo htmlspecialchars($_POST['nome']);
-?>
-    </div>
-</div>
+    function printPage() {
+        window.print();
+    }
 
 
-<h1> Idade </h1>
-<?php echo htmlspecialchars($_POST['age']);
-?><br />
- 
- <h2> Data de Nascimento </h2>
-<?php echo htmlspecialchars($_POST['date']);
-?><br />
+    window.onload = function() {
+        printPage();
+    };
+</script>
 
 
-<!-- Contatos  -->
- <div id="contato" class="sidebar" class="cont" > 
-<h1> Contato </h1>
-<?php echo htmlspecialchars($_POST['telefone']);
-?><br /><?php
-      echo ($_POST['email']); 
-      ?><br /><?php
-      echo ($_POST['linkedin'])
-      ?>
- </div>
+<h1><?php echo htmlspecialchars($_POST['nome']); ?></h1>
 
- 
 
-<!-- Cargo Pretendido  -->
- 
-<h1> Cargo </h1>
-<?php echo htmlspecialchars($_POST['cargo']);
-?><br />
- 
- 
-<!-- Objetivo  -->
- 
-<h1> Objetivo Profissional </h1>
-<?php echo htmlspecialchars($_POST['objetivo']);
-?><br /><?php
- 
+<p><strong>Telefone:</strong> <?php echo htmlspecialchars($_POST['telefone']); ?></p>
+<p><strong>Email:</strong> <?php echo htmlspecialchars($_POST['email']); ?></p>
+<p><strong>LinkedIn:</strong> <?php echo htmlspecialchars($_POST['linkedin']); ?></p>
 
+
+<p><strong>Idade:</strong> <?php echo htmlspecialchars($_POST['age']); ?></p>
+<p><strong>Data de Nascimento:</strong> <?php echo htmlspecialchars($_POST['date']); ?></p>
+
+
+<h2>Cargo Pretendido</h2>
+<p><?php echo htmlspecialchars($_POST['cargo']); ?></p>
+
+
+<h2>Objetivo Profissional</h2>
+<p><?php echo htmlspecialchars($_POST['objetivo']); ?></p>
+
+
+<h2>Formação Acadêmica</h2>
+<?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Captura os dados de formação e experiência
-    $formacoes_nomes = $_POST['formacao_nome']; // Nome da Formação
-    $formacoes_inicios = $_POST['formacao_inicio']; // Início
-    $formacoes_conclusoes = $_POST['formacao_conclusao']; // Conclusão
-    $experiencias = $_POST['experiencia']; // Dados de experiência (se houver)
 
-    echo "<h2>Formações</h2>";
+    $formacoes_nomes = $_POST['formacao_nome']; 
+    $formacoes_inicios = $_POST['formacao_inicio']; 
+    $formacoes_conclusoes = $_POST['formacao_conclusao']; 
 
-    // Processa e exibe as formações
+
     foreach ($formacoes_nomes as $index => $nome) {
-        // Verifica se o índice existe para início e conclusão para evitar erros
         $inicio = isset($formacoes_inicios[$index]) ? $formacoes_inicios[$index] : 'Não informado';
         $conclusao = isset($formacoes_conclusoes[$index]) ? $formacoes_conclusoes[$index] : 'Não informado';
 
-        echo "<p>Formação " . ($index + 1) . ": " . htmlspecialchars($nome) . "<br>";
-        echo "Início: " . htmlspecialchars($inicio) . "<br>";
-        echo "Conclusão: " . htmlspecialchars($conclusao) . "</p>";
+        echo "<p><strong>Formação " . ($index + 1) . ":</strong> " . htmlspecialchars($nome) . "<br>";
+        echo "<strong>Início:</strong> " . htmlspecialchars($inicio) . "<br>";
+        echo "<strong>Conclusão:</strong> " . htmlspecialchars($conclusao) . "</p>";
     }
-    
-
-    echo "<h2>Experiências</h2>";
-    foreach ($experiencias as $index => $experiencia) {
-        echo "<p>Experiência " . ($index + 1) . ": " . htmlspecialchars($experiencia) . "</p>";
-    }
-
-    
 }
+?>
 
+
+<h2>Experiência Profissional</h2>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $experiencias = $_POST['experiencia'];
+
+    foreach ($experiencias as $index => $experiencia) {
+        echo "<p><strong>Experiência " . ($index + 1) . ":</strong> " . htmlspecialchars($experiencia) . "</p>";
+    }
+}
+?>
+
+</body>
+</html>
